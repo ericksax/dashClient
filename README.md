@@ -17,6 +17,7 @@ Back
 - CRUD Cliente e Contatos
 - JWT Login
 - Seriaização e validacões com Zod
+- REST
 
 ## Tech Stack
 
@@ -24,7 +25,7 @@ Back
 
 **Server:** Node, Express, TypeOrm, Postgres
 
-## Environment Variables
+## Variaveis de Ambiente
 
 Para rodar o projeto, você vai precisar definir as seguintes variaveis de ambiente no arquivo .env
 
@@ -45,7 +46,7 @@ Para rodar o projeto, você vai precisar definir as seguintes variaveis de ambie
 Clone o projeto
 
 ```bash
-  git clone https://github.com/dash-client.git
+  git clone https://github.com/Kenzie-Academy-Brasil-Developers/dash-client.git
 ```
 
 Vá para a pasta do projeto.
@@ -67,12 +68,6 @@ Start app
 ```
 
 ## Rodando local (Back)
-
-Clone o projeto
-
-```bash
-  git clone https://github.com/dash-client.git
-```
 
 Vá para a pasta do projeto.
 
