@@ -27,7 +27,7 @@ Back
 
 ## Variaveis de Ambiente
 
-Para rodar o projeto, você vai precisar definir as seguintes variaveis de ambiente no arquivo .env
+Para rodar o projeto, você vai precisar definir as variaveis de ambiente abaixo no arquivo .env, que deve ser criado na raiz da pasta back.
 
 `API_KEY`
 
