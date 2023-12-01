@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DashClient
 
-## Getting Started
+Plataforma que possibilita a criação de um perfil e posterior registro de contatos que se relacionan com esse perfil. A aplicação proporciona o consumo de uma api em NodeJs para o gerenciamento desses contatos. Um CRUD completo.
 
-First, run the development server:
+## Features
+
+Front:
+
+- Login
+- Autenticação JWT
+- Painel de gerenciamento de contatos (criação, edição, deleção e visualização)
+- Proteção de rotas
+- Gerenciamento de estado
+
+Back
+
+- CRUD Cliente e Contatos
+- JWT Login
+- Seriaização e validacões com Zod
+
+## Tech Stack
+
+**Client:** React(NextJs), Zustand, TailwindCSS
+
+**Server:** Node, Express, TypeOrm, Postgres
+
+## Environment Variables
+
+Para rodar o projeto, você vai precisar definir as seguintes variaveis de ambiente no arquivo .env
+
+`API_KEY`
+
+`DATABASE_URL` (postgres://<user>:<pass>@<host>:<port>/dbname)
+
+`SECRET_KEY`
+
+`EXPIRES_IN`
+
+`PORT`
+
+`ANOTHER_API_KEY`
+
+## Rodando local (Front)
+
+Clone o projeto
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/dash-client.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vá para a pasta do projeto.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd dash-client/front
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Instalar dependencias
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Rodando local (Back)
 
-## Deploy on Vercel
+Clone o projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+  git clone https://github.com/dash-client.git
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Vá para a pasta do projeto.
+
+```bash
+  cd dash-client/back
+```
+
+Instalar dependências
+
+```bash
+  npm install
+```
+
+Rodar as migrations:
+
+```bash
+  npm run typeorm migration:run -- -d src/data-source.ts
+```
+
+Start app
+
+```bash
+  npm run dev
+```
+
+## Authors
+
+Feito com amor por:
+
+- [@ericksax](https://www.github.com/ericksax)
