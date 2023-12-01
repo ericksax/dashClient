@@ -5,14 +5,18 @@ import {
   ContactResponse,
   ContactUpdate,
 } from "../interfaces/contact.interface";
+
 import {
   contactRepository,
   userRepository,
 } from "../repositories/repositories";
-import { contactSchema } from "../schemas/contact.schema";
+import {
+  contactSchema,
+  contactsResponseSchema,
+} from "../schemas/contact.schema";
 
 class ContactService {
-  async create(userId: string, data: ContactRequest): Promise<ContactResponse> {
+  async create(userId: string, data: ContactRequest) {
     const user = await userRepository.findOne({
       where: {
         id: userId,
@@ -28,9 +32,21 @@ class ContactService {
       user,
     });
 
-    await userRepository.save(contact);
+    await contactRepository.save(contact);
 
-    return contactSchema.parse(contact);
+    return userRepository.findOne({
+      where: {
+        id: userId,
+      },
+      relations: {
+        contacts: true,
+      },
+    });
+  }
+
+  async list() {
+    const contacts = await contactRepository.find();
+    return contactsResponseSchema.parse(contacts);
   }
 
   async update(
@@ -69,6 +85,23 @@ class ContactService {
     }
 
     await contactRepository.remove(contact);
+  }
+
+  listByUser(user_id: string) {
+    const user = userRepository.findOne({
+      where: {
+        id: user_id,
+      },
+      relations: {
+        contacts: true,
+      },
+    });
+
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    return user;
   }
 }
 

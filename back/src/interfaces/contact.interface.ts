@@ -6,6 +6,7 @@ import {
   contactUpdateSchema,
   contactsResponseSchema,
 } from "../schemas/contact.schema";
+import { Contact } from "../entities/Contact";
 
 type ContactRequest = z.infer<typeof contactRequestSchema>;
 type ContactUpdate = DeepPartial<ContactRequest>;
