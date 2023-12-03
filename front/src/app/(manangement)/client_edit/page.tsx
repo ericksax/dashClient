@@ -22,23 +22,29 @@ const EditClient = () => {
   });
 
   const handleDeleteClient = async (client_id: string) => {
-    await fetch("http://localhost:3333/users/" + client_id, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((result) => {
-      if (result.status === 204) {
-        toast.success("Usuário deletado com sucesso", {
-          ...configObjectToasty,
-        });
+    try {
+      await fetch("http://localhost:3333/users/" + client_id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((result) => {
+        if (result.status === 204) {
+          toast.success("Usuário deletado com sucesso", {
+            ...configObjectToasty,
+          });
 
-        localStorage.removeItem("@idClient");
-        localStorage.removeItem("@tokenClient");
+          localStorage.removeItem("@idClient");
+          localStorage.removeItem("@tokenClient");
 
-        push("/");
-      }
-    });
+          push("/");
+        } else {
+          toast.error("Não foi possível deletar o usuário", configObjectToasty);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const submit = async (formValues: FieldValues) => {

@@ -1,19 +1,13 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { ToastProvider } from "@/components/tostProvider";
 import { usePathname } from "next/navigation";
-import IsAuthenticated from "@/components/isAuthenticated/page";
+import IsAuthenticated from "@/components/isAuthenticated";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata: Metadata = {
-//   title: "DashClient",
-//   description: "client your self",
-// };
 
 export default function RootLayout({
   children,

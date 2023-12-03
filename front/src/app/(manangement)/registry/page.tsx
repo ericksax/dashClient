@@ -40,6 +40,8 @@ const Registry = () => {
             ...configObjectToasty,
           });
           push("/");
+        } else {
+          toast.error("Não foi possível criar o usuário", configObjectToasty);
         }
       });
     } catch (err) {
@@ -89,7 +91,11 @@ const Registry = () => {
           </FormErrorMessage>
         </div>
         <div className="mb-4">
-          <Input label="Confirm Password" {...register("confirmPassword")} />
+          <Input
+            type="password"
+            label="Confirm Password"
+            {...register("confirmPassword")}
+          />
           <FormErrorMessage>
             {errors.confirmPassword ? errors.confirmPassword.message : ""}
           </FormErrorMessage>

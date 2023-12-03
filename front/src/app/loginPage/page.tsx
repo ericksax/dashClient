@@ -9,8 +9,10 @@ import { configObjectToasty } from "@/constantes";
 import { FormValuesProps, loginSchema } from "./zodLoginSchema";
 import FormErrorMessage from "@/components/formMessageError";
 import Input from "@/components/inputs";
+import { useAuth } from "@/store/signInStore";
 
 const Login = () => {
+  const signIn = useAuth((state) => state.signIn);
   const { push } = useRouter();
   const {
     register,
@@ -21,30 +23,8 @@ const Login = () => {
   });
 
   const submit = async (formData: FieldValues) => {
-    try {
-      await fetch("http://localhost:3333/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }).then(async (result) => {
-        if (result.status === 200) {
-          toast.success("Login realizado com sucesso", {
-            ...configObjectToasty,
-          });
-          push("/dash");
-          const data = await result.json();
-          localStorage.setItem("@tokenClient", data.token);
-          localStorage.setItem("@idClient", data.id);
-        } else {
-          toast.error("E-mail ou senha inválidos", configObjectToasty);
-        }
-      });
-    } catch (err) {
-      toast.error("Servidor não responde.", configObjectToasty);
-      console.log(err);
-    }
+    await signIn(formData);
+    push("/dash");
   };
 
   return (
