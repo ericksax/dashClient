@@ -14,9 +14,9 @@ userRoutes.get("", async (req, res) => userController.list(req, res));
 userRoutes.get("/:id", async (req, res) =>
   userController.userDetails(req, res)
 );
-userRoutes.put("/:id/contacts", async (req, res) =>
-  contactController.create(req, res)
-);
+// userRoutes.put("/:id/contacts", async (req, res) =>
+//   contactController.create(req, res)
+// );
 
 userRoutes.patch("/:id", async (req, res) => userController.update(req, res));
 

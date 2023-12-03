@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { contactController } from "../controllers";
+import { ensureIsAuthenticated } from "../midlewares/ensureIsAuthenticated";
 
 const contactRouter = Router();
 
-contactRouter.post("", async (req, res) => contactController.create(req, res));
+contactRouter.post("", ensureIsAuthenticated, async (req, res) =>
+  contactController.create(req, res)
+);
 
 contactRouter.patch("/:id", async (req, res) =>
   contactController.update(req, res)

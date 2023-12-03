@@ -27,6 +27,16 @@ class ContactService {
       throw new AppError("User not found", 404);
     }
 
+    const contactAlreadyExists = await contactRepository.findOne({
+      where: {
+        email: data.email,
+      },
+    });
+
+    if (contactAlreadyExists) {
+      throw new AppError("Contact already exists", 409);
+    }
+
     const contact: Contact = contactRepository.create({
       ...data,
       user,
@@ -34,14 +44,7 @@ class ContactService {
 
     await contactRepository.save(contact);
 
-    return userRepository.findOne({
-      where: {
-        id: userId,
-      },
-      relations: {
-        contacts: true,
-      },
-    });
+    return contactSchema.parse(contact);
   }
 
   async list() {

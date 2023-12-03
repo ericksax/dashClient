@@ -35,8 +35,19 @@ class UserService {
       ...data,
       password: hashedPassword,
     });
-    const result = await userRepository.save(user);
-    return userDetailsResponseSchema.parse(result);
+
+    await userRepository.save(user);
+
+    const newUser = await userRepository.findOne({
+      where: {
+        id: user.id,
+      },
+      relations: {
+        contacts: true,
+      },
+    });
+
+    return userDetailsResponseSchema.parse(newUser);
   }
 
   async update(data: IUserUpdate, userId: string): Promise<IUserResponse> {

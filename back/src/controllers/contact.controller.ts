@@ -6,10 +6,10 @@ class ContactController {
   constructor(public contactService: ContactService) {}
 
   async create(req: Request, res: Response) {
-    const { id } = req.params;
+    const { userId } = res.locals;
     const data: ContactRequest = req.body;
-    const contact = await this.contactService.create(id, data);
-    return res.json(contact);
+    const contact = await this.contactService.create(userId, data);
+    return res.status(201).json(contact);
   }
 
   async update(req: Request, res: Response) {
