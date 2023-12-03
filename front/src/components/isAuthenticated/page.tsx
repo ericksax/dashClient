@@ -6,10 +6,8 @@ const IsAuthenticated = ({ children }: { children: ReactNode }) => {
   const { push } = useRouter();
 
   const isUserAuthenticated = () => {
-    return localStorage.getItem("@tokenClient") ? true : false;
+    return window.localStorage.getItem("@tokenClient")! ? true : false;
   };
-
-  console.log(isUserAuthenticated());
 
   const isAuth = isUserAuthenticated();
   useEffect(() => {

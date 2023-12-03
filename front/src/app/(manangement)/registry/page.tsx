@@ -7,6 +7,7 @@ import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import FormErrorMessage from "@/components/formMessageError";
 import { useRouter } from "next/navigation";
+import { configObjectToasty } from "@/constantes";
 
 const Registry = () => {
   const { push } = useRouter();
@@ -34,18 +35,11 @@ const Registry = () => {
         },
         body: JSON.stringify(requestValues),
       }).then((data) => {
-        console.log(data.status);
         if (data.status === 201) {
           toast.success("Usuário criado com sucesso", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
+            ...configObjectToasty,
           });
+          push("/");
         }
       });
     } catch (err) {
@@ -59,8 +53,6 @@ const Registry = () => {
       password: "",
       confirmPassword: "",
     });
-
-    push("/");
   };
 
   return (
@@ -91,7 +83,7 @@ const Registry = () => {
           </FormErrorMessage>
         </div>
         <div className="mb-4">
-          <Input label="Password" {...register("password")} />
+          <Input type="password" label="Password" {...register("password")} />
           <FormErrorMessage>
             {errors.password ? errors.password.message : ""}
           </FormErrorMessage>

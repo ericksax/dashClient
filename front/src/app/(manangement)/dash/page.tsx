@@ -27,9 +27,9 @@ export default function Dash() {
     });
 
     const data = await result.json();
+
     setContacts(data.contacts);
     setClient(data);
-    console.log(client);
   };
 
   useEffect(() => {

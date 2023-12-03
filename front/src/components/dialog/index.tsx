@@ -1,3 +1,5 @@
+"use client";
+
 import Input from "../inputs";
 import FormErrorMessage from "@/components/formMessageError";
 import { PulseLoader } from "react-spinners";
@@ -6,10 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEditContactValues, formEditZodSchema } from "./formEditZodSchema";
 import { RefObject } from "react";
 import { toast } from "react-toastify";
-
 import { useContacts } from "@/store/contactsStore";
 import { configObjectToasty } from "@/constantes";
-import { error } from "console";
 
 type ContactProps = {
   name: string;
@@ -47,20 +47,16 @@ export const Dialog = ({ modalRef, contact, edit }: DialogProps) => {
   };
 
   async function registerContact(formData: FieldValues) {
-    const id = localStorage.getItem("@idClient")!;
     try {
-      const response = await fetch(
-        `http://localhost:3333/users/${id}/contacts`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (response.status === 200) {
+      const response = await fetch(`http://localhost:3333/contacts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("@tokenClient")!}`,
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 201) {
         toast.success("Contato criado com sucesso", {
           ...configObjectToasty,
         });
@@ -72,8 +68,9 @@ export const Dialog = ({ modalRef, contact, edit }: DialogProps) => {
           }
         );
       }
-      const client = await response.json();
-      setContacts(client.contacts);
+      const contact = await response.json();
+
+      setContacts([...contacts, contact]);
     } catch (err) {
       console.log(err);
     }
@@ -102,7 +99,6 @@ export const Dialog = ({ modalRef, contact, edit }: DialogProps) => {
   }
 
   const submit = async (formData: FieldValues) => {
-    console.log(edit);
     try {
       if (edit) {
         await editContact(formData, contact!);

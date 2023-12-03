@@ -7,9 +7,11 @@ import { ClientEditFormValues, clientEditSchema } from "./clientEditSchema";
 import { useClients } from "@/store/clientStore";
 import { toast } from "react-toastify";
 import { configObjectToasty } from "@/constantes";
+import { useRouter } from "next/navigation";
 
 const EditClient = () => {
   const client = useClients((state) => state.client);
+  const { push } = useRouter();
 
   const {
     register,
@@ -18,6 +20,26 @@ const EditClient = () => {
   } = useForm<ClientEditFormValues>({
     resolver: zodResolver(clientEditSchema),
   });
+
+  const handleDeleteClient = async (client_id: string) => {
+    await fetch("http://localhost:3333/users/" + client_id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((result) => {
+      if (result.status === 204) {
+        toast.success("Usuário deletado com sucesso", {
+          ...configObjectToasty,
+        });
+
+        localStorage.removeItem("@idClient");
+        localStorage.removeItem("@tokenClient");
+
+        push("/");
+      }
+    });
+  };
 
   const submit = async (formValues: FieldValues) => {
     try {
@@ -79,8 +101,15 @@ const EditClient = () => {
           {errors.contact ? errors.contact.message : null}
         </FormErrorMessage>
 
-        <button className="w-full bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600 mt-8">
-          Enviar
+        <button
+          type="button"
+          onClick={() => handleDeleteClient(client.id)}
+          className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600 mt-8 ml-8 float-right"
+        >
+          Deletar
+        </button>
+        <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600 mt-8 float-right">
+          Editar
         </button>
       </form>
     </main>
