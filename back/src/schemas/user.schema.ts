@@ -26,6 +26,7 @@ const userDetailsResponseSchema = userSchema
 const userUpdateSchema = userRequestSchema.partial();
 const usersResponseSchema = z.array(userDetailsResponseSchema);
 const userResponseSchema = userSchema.omit({ password: true, contacts: true });
+
 export {
   userRequestSchema,
   userDetailsResponseSchema,

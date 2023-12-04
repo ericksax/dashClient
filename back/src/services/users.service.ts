@@ -1,5 +1,4 @@
 import {
-  IUser,
   IUserRequest,
   IUserResponse,
   IUserUpdate,
@@ -9,7 +8,6 @@ import { userRepository } from "../repositories/repositories";
 import { hash } from "bcryptjs";
 import {
   userDetailsResponseSchema,
-  userResponseSchema,
   usersResponseSchema,
 } from "../schemas/user.schema";
 import { AppError } from "../errors/AppError";
