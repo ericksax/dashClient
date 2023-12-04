@@ -13,7 +13,7 @@ type Client = {
   client: {
     name: string;
     email: string;
-    phone: string;
+    contact: string;
     created_at: string;
     id: string;
     contacts: Contact[];

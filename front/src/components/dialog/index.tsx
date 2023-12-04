@@ -78,7 +78,6 @@ export const Dialog = ({ modalRef, contact, edit }: DialogProps) => {
   }
 
   async function editContact(data: FieldValues, contact: ContactProps) {
-    console.log(contact);
     const result = await fetch("http://localhost:3333/contacts/" + contact.id, {
       method: "PATCH",
       headers: {
@@ -109,6 +108,7 @@ export const Dialog = ({ modalRef, contact, edit }: DialogProps) => {
       console.log(err);
     }
   };
+
   return (
     <dialog
       ref={modalRef}

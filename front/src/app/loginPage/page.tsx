@@ -2,14 +2,12 @@
 
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
-import { configObjectToasty } from "@/constantes";
 import { FormValuesProps, loginSchema } from "./zodLoginSchema";
 import FormErrorMessage from "@/components/formMessageError";
 import Input from "@/components/inputs";
-import { useAuth } from "@/store/signInStore";
+import { useAuth } from "@/store/authStore";
 
 const Login = () => {
   const signIn = useAuth((state) => state.signIn);

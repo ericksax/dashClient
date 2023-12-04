@@ -8,10 +8,7 @@ import { useClients } from "@/store/clientStore";
 
 export default function Dash() {
   const id = window.localStorage.getItem("@idClient")!;
-  const [setClient, client] = useClients((state) => [
-    state.setClient,
-    state.client,
-  ]);
+  const setClient = useClients((state) => state.setClient);
   const ref = useRef<HTMLDialogElement>(null);
   const [setContacts, contacts] = useContacts((state) => [
     state.setContacts,

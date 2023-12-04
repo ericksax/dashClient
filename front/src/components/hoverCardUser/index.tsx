@@ -2,11 +2,12 @@ import * as HoverCard from "@radix-ui/react-hover-card";
 import Link from "next/link";
 import { UserCircle } from "@phosphor-icons/react";
 import { FiEdit, FiLogOut } from "react-icons/fi";
+import { useAuth } from "@/store/authStore";
 
 const HoverCardDemo = () => {
+  const signOut = useAuth((state) => state.signOut);
   const logout = () => {
-    localStorage.removeItem("@idClient");
-    localStorage.removeItem("@tokenClient");
+    signOut();
   };
   return (
     <HoverCard.Root>
@@ -34,7 +35,6 @@ const HoverCardDemo = () => {
           >
             Sair <FiLogOut />
           </Link>
-
           <HoverCard.Arrow className="fill-gray-800" />
         </HoverCard.Content>
       </HoverCard.Portal>

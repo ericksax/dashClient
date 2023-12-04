@@ -1,5 +1,4 @@
 import { configObjectToasty } from "@/constantes";
-import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { create } from "zustand";
@@ -7,6 +6,7 @@ import { create } from "zustand";
 type AuthProps = {
   token: string;
   signIn: (formData: FieldValues) => Promise<void>;
+  signOut: () => void;
 };
 
 export const useAuth = create<AuthProps>((set) => ({
