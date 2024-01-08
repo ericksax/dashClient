@@ -4,8 +4,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-const Input = forwardRef(
-  ({ label, ...rest }: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+const Input = forwardRef(function customInput 
+  ({ label, ...rest }: InputProps, ref: ForwardedRef<HTMLInputElement>){
     return (
       <>
         <label className="block text-gray-400 mb-2">{label}</label>
@@ -19,4 +19,4 @@ const Input = forwardRef(
   }
 );
 
-export default Object.assign(Input, { displayNme: "Input" });
+export default Input

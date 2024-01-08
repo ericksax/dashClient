@@ -2,7 +2,7 @@
 
 import ContactCard from "@/components/contactCard";
 import { Dialog } from "@/components/dialog";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useContacts } from "../../../store/contactsStore";
 import { useClients } from "@/store/clientStore";
 
@@ -18,7 +18,10 @@ export default function Dash() {
   const handleClick = () => {
     ref.current?.showModal();
   };
-  const fetchData = async () => {
+
+
+
+  const fetchData = useCallback( async () => {
     const result = await fetch(`http://localhost:3333/users/${id}`, {
       cache: "no-cache",
     });
@@ -27,7 +30,7 @@ export default function Dash() {
 
     setContacts(data.contacts);
     setClient(data);
-  };
+  }, [setClient, setContacts, id]);
 
   useEffect(() => {
     fetchData();
