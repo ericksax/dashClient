@@ -18,7 +18,7 @@ const Client = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <main className="flex flex-col mt-24 max-w-4xl m-auto">

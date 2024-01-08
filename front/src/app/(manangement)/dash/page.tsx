@@ -31,7 +31,7 @@ export default function Dash() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <main className="flex flex-col h-[calc(100vh-97px)] max-w-4xl m-auto px-4">

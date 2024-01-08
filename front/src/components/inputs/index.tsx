@@ -18,4 +18,5 @@ const Input = forwardRef(
     );
   }
 );
-export default Input;
+
+export default Object.assign(Input, { displayNme: "Input" });
