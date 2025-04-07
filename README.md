@@ -1,9 +1,6 @@
 # DashClient
 
-Plataforma que possibilita a criação de um perfil e posterior registro de contatos que se relacionan com esse perfil. A aplicação proporciona o consumo de uma api em NodeJs para o gerenciamento desses contatos. Um CRUD completo.
-
-## Features
-
+Plataforma que possibilita a criação de um perfil e posterior registro de contatos que se relacionan com esse perfil. O back end possibilita o recurso de criação, deleção, update e leitura (CRUD)
 Front:
 
 - Login
